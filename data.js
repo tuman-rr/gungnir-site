@@ -10,9 +10,9 @@ window.GUNGNIR_DATA = {
   // ===== Метрики секції "Бойова робота" =====
   stats: {
     sorties: { value: 7259, suffix: "" }, // Бойових вильотів
-    hits:    { value: 89,   suffix: "" }, // Уражено цілей
+    hits:    { value: 735,   suffix: "" }, // Уражено цілей
     armor:   { value: 31,   suffix: "" }, // Знищено техніки
-    cargo:   { value: 5000, suffix: "" }, // Посилок доставлено
+    cargo:   { value: 6125, suffix: "" }, // Посилок доставлено
     lives:   { value: 3,    suffix: "" }, // Врятованих життів
     // Обчислюється автоматично як sorties × config.avgKmPerSortie
     totalDistance: { compute: "sorties_x_avgkm", suffix: " км" }
@@ -100,7 +100,7 @@ window.GUNGNIR_DATA = {
   contact: {
     telegram:     "@gungnir_recruit_bot",
     telegramUrl:  "https://t.me/gungnir_recruit_bot",
-    email:        "recruit@gungnir.unit",
+    email:        "gungnir.ss.2025@gmail.com",
     responseTime: "До 24 годин",
     location:     "Україна · уточнюється на співбесіді"
   },
@@ -110,14 +110,14 @@ window.GUNGNIR_DATA = {
   // wide: true → займає 2 колонки, tall: true → 2 рядки
   // Замінюй src на реальні шляхи до файлів або URL
   gallery: [
-    // --- ЗРАЗКИ (замінити на реальні фото/відео) ---
-    // { src: "gallery/sortie1.jpg",  type: "photo", title: "Виліт на ціль",        tag: "Strike", wide: true },
-    // { src: "gallery/prep.jpg",     type: "photo", title: "Підготовка до вильоту", tag: "Prep" },
-    // { src: "gallery/night.jpg",    type: "photo", title: "Нічна операція",        tag: "Night ops" },
-    // { src: "gallery/strike.mp4",   type: "video", title: "Підтверджене ураження", tag: "Video · OBJ CTRL", poster: "gallery/strike_thumb.jpg", wide: true },
-    // { src: "gallery/team.jpg",     type: "photo", title: "Екіпаж",               tag: "Team" },
-    // { src: "gallery/drone.jpg",    type: "photo", title: "Vampire перед вильотом", tag: "Hardware" },
-    // { src: "gallery/delivery.jpg", type: "photo", title: "Доставка вантажу",      tag: "Cargo" },
+    { src: "gallery/2.jpeg",  type: "photo", title: "Команда GUNGNIR",             tag: "Team",      wide: true },
+    { src: "gallery/4.jpeg",  type: "photo", title: "Підготовка БпЛА до вильоту", tag: "Hardware",  wide: true },
+    { src: "gallery/1.jpeg",  type: "photo", title: "Шеврони підрозділу",          tag: "Символіка"            },
+    { src: "gallery/3.jpeg",  type: "photo", title: "Підготовка",                  tag: "Prep"                  },
+    { src: "gallery/5.jpeg",  type: "photo", title: "Боєць підрозділу",            tag: "Бійці"                 },
+    { src: "gallery/7.jpeg",  type: "photo", title: "Бойове чергування",           tag: "Бійці"                 },
+    { src: "gallery/6.jpeg",  type: "photo", title: "Логістика підрозділу",        tag: "Логістика"             },
+    { src: "gallery/8.jpeg",  type: "photo", title: "Перевірка спорядження",       tag: "Prep"                  },
   ]
 
 };

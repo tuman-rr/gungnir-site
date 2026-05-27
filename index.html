@@ -801,7 +801,7 @@ form select option{background:#0a0a0a;color:#fff}
       <p class="lead">Заповнюй форму, або пиши напряму в Telegram / на пошту. Відповідаємо протягом <span data-bind-text="contact.responseTime">24 годин</span>.</p>
     </div>
     <div class="apply-grid reveal">
-      <form id="applyForm" novalidate>
+      <form id="applyForm" action="https://formspree.io/f/xvzyvywo" method="POST" novalidate>
         <div class="form-row">
           <div class="field"><label for="f-name">Імʼя та прізвище</label><input id="f-name" name="name" type="text" required autocomplete="name" /></div>
           <div class="field"><label for="f-age">Вік</label><input id="f-age" name="age" type="number" min="18" max="70" required /></div>
@@ -836,7 +836,7 @@ form select option{background:#0a0a0a;color:#fff}
       <aside class="contact-card">
         <h3>Прямий звʼязок</h3>
         <div class="contact-row"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg><div><span class="lbl">Telegram-бот</span><a class="val" data-bind-href="contact.telegramUrl" data-bind-text="contact.telegram" target="_blank" rel="noopener">@gungnir_recruit_bot</a></div></div>
-        <div class="contact-row"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2"/><rect x="3" y="6" width="18" height="14" rx="2"/><path d="m3 8 9 6 9-6"/></svg><div><span class="lbl">Email</span><a class="val" data-bind-mailto="contact.email" data-bind-text="contact.email" href="mailto:recruit@gungnir.unit">recruit@gungnir.unit</a></div></div>
+        <div class="contact-row"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2"/><rect x="3" y="6" width="18" height="14" rx="2"/><path d="m3 8 9 6 9-6"/></svg><div><span class="lbl">Email</span><a class="val" data-bind-mailto="contact.email" data-bind-text="contact.email" href="mailto:gungnir.ss.2025@gmail.com">gungnir.ss.2025@gmail.com</a></div></div>
         <div class="contact-row"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></svg><div><span class="lbl">Час відповіді</span><span class="val" data-bind-text="contact.responseTime">До 24 годин</span></div></div>
         <div class="contact-row"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><span class="lbl">Розташування</span><span class="val" data-bind-text="contact.location">Україна · уточнюється на співбесіді</span></div></div>
       </aside>
@@ -1105,7 +1105,6 @@ function renderGallery(){
         ${media}
         <div class="g-overlay">
           ${item.tag ? `<div class="g-tag">${item.tag}</div>` : ''}
-          ${item.title ? `<div class="g-title">${item.title}</div>` : ''}
         </div>
         ${isVideo ? `<div class="g-play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>` : ''}
       </div>`;
@@ -1213,16 +1212,33 @@ renderDashboard();
 
 const form = document.getElementById('applyForm');
 const msg = document.getElementById('formMsg');
-form.addEventListener('submit', (e)=>{
+form.addEventListener('submit', async (e)=>{
   e.preventDefault();
   if(!form.checkValidity()){
     msg.textContent = 'Заповни обовʼязкові поля.';
     msg.style.color = '#ff6b6b';
     return;
   }
-  msg.textContent = 'Заявку прийнято. Командир звʼяжеться протягом 24 годин.';
-  msg.style.color = 'var(--yellow)';
-  form.reset();
+  msg.textContent = 'Надсилаємо заявку...';
+  msg.style.color = 'var(--text-3)';
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if(res.ok){
+      msg.textContent = 'Заявку прийнято. Командир звʼяжеться протягом 24 годин.';
+      msg.style.color = 'var(--yellow)';
+      form.reset();
+    } else {
+      msg.textContent = 'Помилка надсилання. Напиши напряму в Telegram.';
+      msg.style.color = '#ff6b6b';
+    }
+  } catch {
+    msg.textContent = 'Немає зʼєднання. Напиши в Telegram.';
+    msg.style.color = '#ff6b6b';
+  }
 });
 </script>
 
